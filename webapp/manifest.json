@@ -1,0 +1,124 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "contactos",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.11.5",
+      "toolsId": "e4e239bf-2425-400b-b065-25614de4e7ff"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "contactos.i18n.i18n"
+        }
+      },
+      "users":{
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "https://dummyjson.com/user"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "contactos.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Routecontactos",
+          "pattern": ":?query:",
+          "target": [
+            "Targetcontactos"
+          ]
+        },
+        {
+					"name": "Targetdetalles",
+					"pattern": "Routedetalles/{parameter}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Targetdetalles"
+					]
+				}
+      ],
+      "targets": {
+        "Targetcontactos": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "contactos",
+          "viewName": "contactos"
+        },
+        "Targetdetalles": {
+					"viewType": "XML",
+					"viewName": "detalles",
+          "viewId": "detalles",
+          "clearControlAggregation": false
+				}
+      }
+    },
+    "rootView": {
+      "viewName": "contactos.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

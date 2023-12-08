@@ -1,0 +1,234 @@
+<mvc:View
+	controllerName="contactos.controller.detalles"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	height="100%">
+	<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader id="_IDGenToolHeader1">
+			<Avatar id="_IDGenAvatar2" src="{users>image}" displaySize="M" press=".onAvatarPressed" tooltip="Profile">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData92" priority="NeverOverflow"/>
+					</layoutData>
+				</Avatar>
+				<Title level="H1" text="{users>firstName} {users>lastName}" wrapping="false" id="productName">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="Disappear"/>
+					</layoutData>
+				</Title>
+				
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:subHeader>
+			<tnt:ToolHeader id="_IDGenToolHeader2">
+				<IconTabHeader id="_IDGenIconTabHeader1"
+						selectedKey="{/selectedKey}"
+						items="{path: '/navigation'}"
+						select=".onItemSelect"
+						mode="Inline">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData10" priority="NeverOverflow" shrinkable="true" />
+					</layoutData>
+					<items>
+						<IconTabFilter id="_IDGenIconTabFilter1"
+								items="{items}"
+								text="{title}"
+								key="{key}">
+							<items>
+								<IconTabFilter id="_IDGenIconTabFilter2"
+										text="{title}"
+										key="{key}">
+								</IconTabFilter>
+							</items>
+						</IconTabFilter>
+					</items>
+				</IconTabHeader>
+			</tnt:ToolHeader>
+		</tnt:subHeader>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="page1">
+				<pages>
+					<ScrollContainer
+						id="page1"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+						<f:SimpleForm id="SimpleFormDisplay354wideDual"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Datos Personales"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel1" text="Nombre" />
+				<Text id="nameText5" text="{users>firstName} {users>lastName}" />
+				<Label id="_IDGenLabel12" text="Edad" />
+				<Text id="nameText4" text="{users>age}" />
+				<Label id="_IDGenLabel13" text="Genero" />
+				<Text id="nameText3" text="{users>gender}" />
+				<Label id="_IDGenLabel14" text="Email" />
+				<Text id="nameText2" text="{users>email}" />
+				<Label id="_IDGenLabel15" text="Fecha de Nacimiento" />
+				<Text id="nameText1" text="{users>birthDate}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+						id="page2"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+					<f:SimpleForm id="SimpleFormDisplay354wideDual4"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Empresa"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel122" text="Empresa" />
+				<Text id="nameText51" text="{users>company/name}" />
+				<Label id="_IDGenLabel1422" text="Departamento" />
+				<Text id="nameText24" text="{users>company/department}" />
+				<Label id="_IDGenLabel1522" text="Titulo"/>
+				<Text id="nameText122" text="{users>company/title}" />
+				<Label id="_IDGenLabel1222" text="Dirección" />
+				<Text id="nameText42" text="{users>company/address/address}" />
+				<Label id="_IDGenLabel1322" text="Ciudad" />
+				<Text id="nameText334" text="{users>company/address/city}" />
+				<Label id="_IDGenLabel13228" text="Codigo Postal" />
+				<Text id="nameText3345" text="{users>company/address/postalCode}" />
+				<Label id="_IDGenLabel13292" text="Estado" />
+				<Text id="nameText336" text="{users>company/address/state}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+						id="page3"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+				<f:SimpleForm id="SimpleFormDisplay354wideDual2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Banco"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel155" text="Tipo de Tarjeta" />
+				<Text id="nameText55" text="{users>bank/cardType}" />
+				<Label id="_IDGenLabel1255" text="Numero de la Tarjeta" />
+				<Text id="nameText46" text="{users>bank/cardNumber}" />
+				<Label id="_IDGenLabel1355" text="Fecha de Expiración" />
+				<Text id="nameText37" text="{users>bank/cardExpire}" />
+				<Label id="_IDGenLabel1455" text="Moneda" />
+				<Text id="nameText28" text="{users>bank/currency}" />
+				<Label id="_IDGenLabel1555" text="IBAN" />
+				<Text id="nameText19" text="{users>bank/iban}" />
+			</f:content>
+		</f:SimpleForm>
+
+					</ScrollContainer>
+					<ScrollContainer
+						id="page4"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+						<f:SimpleForm id="SimpleFormDisplay354wideDual3"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Dirección"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel1444" text="Dirección" />
+				<Text id="nameText566" text="{users>address/address}" />
+				<Label id="_IDGenLabel124" text="Ciudad" />
+				<Text id="nameText466" text="{users>address/city}" />
+				<Label id="_IDGenLabel134" text="Codio Postal" />
+				<Text id="nameText366" text="{users>address/postalCode}" />
+				<Label id="_IDGenLabel144" text="Estado" />
+				<Text id="nameText266" text="{users>address/state}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+							id="page5"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText5" text="Provisioning" />
+					</ScrollContainer>
+					<ScrollContainer
+							id="page6"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText6" text="Monitoring" />
+					</ScrollContainer>
+					<ScrollContainer
+							id="page7"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText7" text="Resources" />
+					</ScrollContainer>
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>
