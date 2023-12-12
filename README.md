@@ -258,8 +258,287 @@ En la siguiente linea ``` var contacto =  oEvent.getSource().getBindingContext("
 Y con ``` oRouter.navTo("Targetdetalles", { parameter : contacto.id} ); ``` realizaremos la navegacion a la segunda pantalla, pasando el parameter con el id del usuario seleccionado para referenciarlo en la segunda pantalla.
 
 # Crear y mapear la vista de la segunda pantalla
-Para poder utilizar 
+Para poder utilizar los datos de la fila seleccionada, agregaremos la siguiente funcion al onInit del controlador de la segunda pantalla, y crearemos la funcion onRouteMatched, la cual estamos referenciando en el onInit, y en la cual llamaremos a ``` oEvent.getParameter(("arguments" )); ``` para obtener los parametros que pasamos en la navegacion, y luego con ``` oArguments.parameter ``` obtendremos el id que pasamos, finalmente con ```         oView.bindElement({path: `users>/users/${num}`}); ``` estamos llamando a usuario que se encuentra en la posicion que corresponde con el id que pasamos.
+```javascript
+ onInit: function () {
+	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+	oRouter.getRoute("Targetdetalles").attachPatternMatched(this._onRouteMatched, this);
+},
 
+ _onRouteMatched: function (oEvent) {              
+        var oArguments = oEvent.getParameter(("arguments" ));
+        var oView = this.getView();
+        var num = oArguments.parameter - 1;
+        oView.bindElement({path: `users>/users/${num}`});
+},
+```
 
 ## Mostrar destalles en pestañas
-## Mostrar form en cada pestaña
+Para crear las pestallas en la vista debemos agregar el siguiente widget, cada pestaña se delimita dentro del ``` <ScrollContainer id="page1"``` donde cada id sera referenciado en el controlador con la sintaxis que pondremos luego, dentro de cada container creamos un form al que le mapearemos data de la misma forma que se hizo en la primera pantalla.
+```XML
+<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader id="_IDGenToolHeader1">
+			<Avatar id="_IDGenAvatar2" src="{users>image}" displaySize="M" press=".onAvatarPressed" tooltip="Profile">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData92" priority="NeverOverflow"/>
+					</layoutData>
+				</Avatar>
+				<Title level="H1" text="{users>firstName} {users>lastName}" wrapping="false" id="productName">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="Disappear"/>
+					</layoutData>
+				</Title>
+				
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:subHeader>
+			<tnt:ToolHeader id="_IDGenToolHeader2">
+				<IconTabHeader id="_IDGenIconTabHeader1"
+						selectedKey="{/selectedKey}"
+						items="{path: '/navigation'}"
+						select=".onItemSelect"
+						mode="Inline">
+					<layoutData>
+						<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData10" priority="NeverOverflow" shrinkable="true" />
+					</layoutData>
+					<items>
+						<IconTabFilter id="_IDGenIconTabFilter1"
+								items="{items}"
+								text="{title}"
+								key="{key}">
+							<items>
+								<IconTabFilter id="_IDGenIconTabFilter2"
+										text="{title}"
+										key="{key}">
+								</IconTabFilter>
+							</items>
+						</IconTabFilter>
+					</items>
+				</IconTabHeader>
+			</tnt:ToolHeader>
+		</tnt:subHeader>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="page1">
+				<pages>
+					<ScrollContainer
+						id="page1"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+						<f:SimpleForm id="SimpleFormDisplay354wideDual"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Datos Personales"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel1" text="Nombre" />
+				<Text id="nameText5" text="{users>firstName} {users>lastName}" />
+				<Label id="_IDGenLabel12" text="Edad" />
+				<Text id="nameText4" text="{users>age}" />
+				<Label id="_IDGenLabel13" text="Genero" />
+				<Text id="nameText3" text="{users>gender}" />
+				<Label id="_IDGenLabel14" text="Email" />
+				<Text id="nameText2" text="{users>email}" />
+				<Label id="_IDGenLabel15" text="Fecha de Nacimiento" />
+				<Text id="nameText1" text="{users>birthDate}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+						id="page2"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+					<f:SimpleForm id="SimpleFormDisplay354wideDual4"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Empresa"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel122" text="Empresa" />
+				<Text id="nameText51" text="{users>company/name}" />
+				<Label id="_IDGenLabel1422" text="Departamento" />
+				<Text id="nameText24" text="{users>company/department}" />
+				<Label id="_IDGenLabel1522" text="Titulo"/>
+				<Text id="nameText122" text="{users>company/title}" />
+				<Label id="_IDGenLabel1222" text="Dirección" />
+				<Text id="nameText42" text="{users>company/address/address}" />
+				<Label id="_IDGenLabel1322" text="Ciudad" />
+				<Text id="nameText334" text="{users>company/address/city}" />
+				<Label id="_IDGenLabel13228" text="Codigo Postal" />
+				<Text id="nameText3345" text="{users>company/address/postalCode}" />
+				<Label id="_IDGenLabel13292" text="Estado" />
+				<Text id="nameText336" text="{users>company/address/state}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+						id="page3"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+				<f:SimpleForm id="SimpleFormDisplay354wideDual2"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Banco"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel155" text="Tipo de Tarjeta" />
+				<Text id="nameText55" text="{users>bank/cardType}" />
+				<Label id="_IDGenLabel1255" text="Numero de la Tarjeta" />
+				<Text id="nameText46" text="{users>bank/cardNumber}" />
+				<Label id="_IDGenLabel1355" text="Fecha de Expiración" />
+				<Text id="nameText37" text="{users>bank/cardExpire}" />
+				<Label id="_IDGenLabel1455" text="Moneda" />
+				<Text id="nameText28" text="{users>bank/currency}" />
+				<Label id="_IDGenLabel1555" text="IBAN" />
+				<Text id="nameText19" text="{users>bank/iban}" />
+			</f:content>
+		</f:SimpleForm>
+
+					</ScrollContainer>
+					<ScrollContainer
+						id="page4"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding">
+						<f:SimpleForm id="SimpleFormDisplay354wideDual3"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Dirección"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label id="_IDGenLabel1444" text="Dirección" />
+				<Text id="nameText566" text="{users>address/address}" />
+				<Label id="_IDGenLabel124" text="Ciudad" />
+				<Text id="nameText466" text="{users>address/city}" />
+				<Label id="_IDGenLabel134" text="Codio Postal" />
+				<Text id="nameText366" text="{users>address/postalCode}" />
+				<Label id="_IDGenLabel144" text="Estado" />
+				<Text id="nameText266" text="{users>address/state}" />
+			</f:content>
+		</f:SimpleForm>
+					</ScrollContainer>
+					<ScrollContainer
+							id="page5"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText5" text="Provisioning" />
+					</ScrollContainer>
+					<ScrollContainer
+							id="page6"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText6" text="Monitoring" />
+					</ScrollContainer>
+					<ScrollContainer
+							id="page7"
+							horizontal="false"
+							vertical="true"
+							height="100%"
+							class="sapUiContentPadding">
+						<Text id="_IDGenText7" text="Resources" />
+					</ScrollContainer>
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+```
+En el controlador agregaremos esta funcion al onInit para que las pestañas tengan acciones, y crearemos la funcion onItemSelect
+```javascript
+onInit: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.getRoute("Targetdetalles").attachPatternMatched(this._onRouteMatched, this);
+            Device.media.attachHandler(this._handleMediaChange, this);
+			this._handleMediaChange();
+
+            var json = {
+                "selectedKey": "page1",
+                "navigation": [
+                    {
+                        "title": "Datos Personales",
+                        "key": "page1"
+                    },
+                    {
+                        "title": "Empresa",
+                        "key": "page2"
+                    },
+                    {
+                        "title": "Banco",
+                        "key": "page3"
+                    },
+                    {
+                        "title": "Dirección",
+                        "key": "page4"
+                    },
+                ]
+            };
+
+            var oModel2 = new JSONModel(json);
+            this.getView().setModel(oModel2);
+            },
+
+	  onItemSelect: function (oEvent) {
+                var oItem = oEvent.getParameter("item");
+                this.byId("pageContainer").to(this.getView().createId(oItem.getKey()));
+            },
+```
+
+Ya con esto las pestañas deberian funcionar y los datos de la fila que se selecciono estaran mapeados.
